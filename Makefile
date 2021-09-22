@@ -1,6 +1,6 @@
 python_version=3.9
 pgcli_version=3.2.0
-image_name=flared/pgcli:${pgcli_version}
+image_name=flared/pgcli
 
 .PHONY: help build push all
 
@@ -19,8 +19,9 @@ help:
 
 build:
 	    @docker build --pull --build-arg PYTHON_VERSION=${python_version} --build-arg PGCLI_VERSION=${pgcli_version} -t ${image_name} .
-
+		@docker tag ${image_name} ${image_name}:${pgcli_version}
 push:
 	    @docker push ${image_name}
+		@docker push ${image_name}:${pgcli_version}
 
 all: build push
