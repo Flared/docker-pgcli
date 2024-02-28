@@ -1,10 +1,10 @@
-ARG PYTHON_VERSION=3.9
+ARG PYTHON_VERSION=3.12
 FROM python:$PYTHON_VERSION-slim
 
-RUN apt-get -y update && apt-get -y install libpq-dev build-essential less && rm -rf /var/lib/apt/lists/*
+RUN apt-get -y update && apt-get -y install libpq-dev less && rm -rf /var/lib/apt/lists/*
+ENV PAGER=less
 
-ARG PGCLI_VERSION=3.2.0
+ARG PGCLI_VERSION=4.0.1
 RUN pip install pgcli==$PGCLI_VERSION
 
-ENV PAGER=less
 ENTRYPOINT ["pgcli"]
